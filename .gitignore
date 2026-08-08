@@ -1,0 +1,13 @@
+# 논문 PDF 원본은 커밋하지 않음 (링크만 기록)
+*.pdf
+
+# Marp 산출물 (slides.md만 커밋, 필요할 때 변환)
+*.pptx
+*.html
+
+# macOS
+.DS_Store
+._*
+
+# 공유용 압축본
+*.zip
