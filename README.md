@@ -7,6 +7,7 @@ Couldn't read papers as a normal user, so I tried sudo.
 | # | 날짜 | 논문 | 분야 | 노트 | 발표 |
 |---|------|------|------|------|------|
 | 1 | 2026-08-08 | [X-VARS: Introducing Explainability in Football Refereeing with Multi-Modal Large Language Models](https://arxiv.org/abs/2404.06332) | Multimodal LLM / Sports | [note](papers/2026-08-08-x-vars/note.md) · [review](papers/2026-08-08-x-vars/review.md) | [slides](papers/2026-08-08-x-vars/slides.md) |
+| 2 | 2026-08-18 | [Recent use of deep learning techniques in clinical applications based on gait: a survey](https://doi.org/10.1093/jcde/qwab054) | Deep Learning / Gait / Clinical | [note](papers/2026-08-18-gait-dl-survey/note.md) | - |
 
 ## 구조
 
