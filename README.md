@@ -8,6 +8,7 @@ Couldn't read papers as a normal user, so I tried sudo.
 |---|------|------|------|------|------|
 | 1 | 2026-08-08 | [X-VARS: Introducing Explainability in Football Refereeing with Multi-Modal Large Language Models](https://arxiv.org/abs/2404.06332) | Multimodal LLM / Sports | [note](papers/2026-08-08-x-vars/note.md) · [review](papers/2026-08-08-x-vars/review.md) | [slides](papers/2026-08-08-x-vars/slides.md) |
 | 2 | 2026-08-18 | [Recent use of deep learning techniques in clinical applications based on gait: a survey](https://doi.org/10.1093/jcde/qwab054) | Deep Learning / Gait / Clinical | [note](papers/2026-08-18-gait-dl-survey/note.md) | - |
+| 3 | 2026-08-25 | [Machine Learning Models for Reliable Gait Phase Detection Using Lower-Limb Wearable Sensor Data](https://doi.org/10.3390/app16031397) | Machine Learning / Gait Phase / Wearable | [note](papers/2026-08-25-gait-phase-detection/note.md) · [assets](papers/2026-08-25-gait-phase-detection/assets/) | - |
 
 ## 구조
 
