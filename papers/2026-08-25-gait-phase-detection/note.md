@@ -7,7 +7,7 @@
 | 출처 | [DOI: 10.3390/app16031397](https://doi.org/10.3390/app16031397) · [MDPI](https://www.mdpi.com/2076-3417/16/3/1397) |
 | 학회/연도 | Applied Sciences, 2026, 16(3), 1397 (Special Issue: AI in Healthcare and Precision Medicine 2nd Ed.) |
 | 읽은 날짜 | 2026-08-25 |
-| 상태 | deep |
+| 상태 | presented (2026-09-09 WalkAI 발제) |
 | 분야 | Machine Learning / Gait Phase Detection / Wearable Sensors |
 
 ## 한 줄 요약
@@ -157,3 +157,32 @@ Ablation 없음. 윈도우 길이·overlap·채널 서브셋·모달리티 기�
 5. Fig 5 재해석: 부스팅의 stance 오류가 HS/TO 경계 근처 윈도우에 집중되는지 확인 (경계 거리별 오류율)
 
 **서베이 노트와의 연결**: 서베이가 지적한 "임상 보행 데이터 절대량 부족"(여기선 6명), "이산 위상 인식 → 외골격·의족", "착용형 IMU가 원격 모니터링 주력"이 그대로 재현. 반면 서베이가 향후 초점으로 꼽은 XAI·전이학습은 이 논문에 전혀 없음 — 트리 모델이라 feature importance라도 뽑았으면 어느 채널이 위상 구분에 기여하는지 볼 수 있었을 텐데 아쉬움.
+
+---
+
+# 검증 (2026-09-09)
+
+발제 준비 중 "윈도우 수 불일치" 의문을 실측하려 함. 원본 figshare 데이터셋을 찾아 확인.
+
+**원본 데이터셋 확정**: Zafar et al., "Development and Evaluation of a Low-Cost Data Acquisition System using Heterogeneous Sensors" (figshare article 11881332, v9). Dataset.zip 2.0 GB + data_Description.docx + Tables.docx 등.
+
+## ① 윈도우 수 모순 — 논문 내부 수치만으로 성립 (데이터 불필요)
+
+- 총 샘플 186,468 + 125,033 + 122,431 = 433,932 (100 Hz ≈ 72분)
+- L=128, stride 64 규칙이면 윈도우 ≈ (433,932−128)/64+1 ≈ **6,780개** (트라이얼 경계 무시 상한)
+- Table 6 "Total Windows"는 샘플 수와 동일한 433,932 — **~64배 차이**. 성립하려면 stride=1(overlap 99.2%)이어야 하고, 그 경우 누수는 서술(50%)보다 훨씬 심각
+- 판정: **본문 윈도잉 서술과 결과 표가 서로 모순** (확정)
+
+## ② 원 데이터셋에 위상 라벨 체계가 이미 존재 (문서 증거)
+
+data_Description.docx 확인 결과:
+
+- 데이터 열 AY–BF: **heel contact / toe off 보행 이벤트 인덱스** 열 존재
+- 트리거 코드(4자리)에 **Phase: 1=Stance, 2=Swing, 3=Mid-swing** — 3위상 체계가 원 데이터셋에 정의돼 있음
+- 데이터셋 자체 Tables.docx의 Table 4: **flex vs footswitch의 IC/TO 검출 시간차 분석** 기존재 (논문의 "버튼+flex 융합" 아이디어의 선례)
+- 판정: 논문의 전제 "원 데이터셋에 위상 라벨이 없어서 직접 생성"은 설명서와 **상충**. mid-swing 3분류라는 특이한 구성도 원 데이터셋 유래로 보임 → relabeling 기여의 신규성이 프레이밍 대비 축소
+
+## ③ 열린 의문 (미완)
+
+- 실데이터 샘플 수·트리거 열 품질 실측은 못 함 — Dataset.zip 2.0 GB, 회선 속도상 발표 전 완료 불가(50분에 372 MB)
+- 트리거/이벤트 열이 실제로는 희소·불완전할 가능성 남음 — 그렇다면 relabeling이 정당화될 여지 있음. **후속: 전체 다운로드 후 오른쪽 다리 LW 트라이얼 샘플 수 집계 + 트리거 열 커버리지 확인**
